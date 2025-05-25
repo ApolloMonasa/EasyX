@@ -1,2 +1,2 @@
 # EasyX
-Easyx Projects
+EasyX Projects
