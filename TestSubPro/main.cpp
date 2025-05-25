@@ -116,41 +116,41 @@ int main() {
 //  }
 
   /* 贴图 */
-//    initgraph(800, 600);
-//
-////  //1.原样贴图
-//  IMAGE img;
-////  loadimage(&img, "./res/beauty.png", 1000, 800);//缩放是可选的
-//  loadimage(&img, "./res/sun.jpg", 800, 600);
-//  //展示
-//  putimage(0, 0, &img);
-//
-//  //2.透明贴图
-////  IMAGE tests[2];
-////  loadimage(tests, "./res/test.png", 800, 600);
-////  loadimage(tests+1, "./res/testbk.png", 800, 600);
-////  putimage(0, 0, tests, SRCAND);
-////  putimage(0, 0, tests + 1, SRCPAINT);
+    initgraph(800, 600);
+
+//  //1.原样贴图
+  IMAGE img;
+//  loadimage(&img, "./res/beauty.png", 1000, 800);//缩放是可选的
+  loadimage(&img, "./res/sun.jpg", 800, 600);
+  //展示
+  putimage(0, 0, &img);
+
+  //2.透明贴图
+//  IMAGE tests[2];
+//  loadimage(tests, "./res/test.png", 800, 600);
+//  loadimage(tests+1, "./res/testbk.png", 800, 600);
+//  putimage(0, 0, tests, SRCAND);
+//  putimage(0, 0, tests + 1, SRCPAINT);
 
 
   /*按键交互*/
   //1.阻塞按键交互
   //2.非阻塞按键交互
-  initgraph(800, 800);
-  BeginBatchDraw();
-  while(1) {
-    cleardevice();
-    DrawBall(ball);
-    DrawBall(myball);
-    if(Timer(20, 0)) MoveBall();
-//    if(kbhit()) KeyDown();//判断存在按键再处理防止干扰
-
-    if(Timer(20, 1)) KeyDown2();
-
-    //Sleep(20);
-    FlushBatchDraw();
-  }
-  EndBatchDraw();
+//  initgraph(800, 800);
+//  BeginBatchDraw();
+//  while(1) {
+//    cleardevice();
+//    DrawBall(ball);
+//    DrawBall(myball);
+//    if(Timer(20, 0)) MoveBall();
+////    if(kbhit()) KeyDown();//判断存在按键再处理防止干扰
+//
+//    if(Timer(20, 1)) KeyDown2();
+//
+//    //Sleep(20);
+//    FlushBatchDraw();
+//  }
+//  EndBatchDraw();
   printf("hello world!\n");
   getchar();
   closegraph();
