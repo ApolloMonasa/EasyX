@@ -1,13 +1,10 @@
 # EasyX
-EasyX Projects
-0. 快速上手EasyX
-   1. 学会创建图形化窗口
-      1. 包含头文件：
-        - graphics.h：包含被淘汰的函数
-        - easyx.h：只有最新的函数
-      2. 两个函数:initgraph(int x, int y, int ) closegraph()
-1. 传统文化拼图游戏
+>这里放置了一些使用EasyX库实现的项目，如果你对此也感兴趣，想要学习。那么或许可以看看。
 
+## 环境配置
+如果你使用的是Mingw编译器，需要做的操作是把前置文件中的压缩包下载（或者前往[官网](https://codebus.cn/bestans/easyx-for-mingw)下载）
+如果你没有相关经验，也可以去看看官网的教程， 我相信那是相当有用的。
 
 ## 快速上手
+
 ### 设置窗口属性
