@@ -1,5 +1,5 @@
 #pragma clang diagnostic push
-#pragma ide diagnostic ignored "modernize-deprecated-headers"
+#pragma ide diagnostic ignored "modernize-deprecated-headers"//used for ignoring specific warnings
 #define _CRT_SECURE_NO_WARNINGS
 #ifdef UNICODE
 #undef UNICODE
@@ -341,7 +341,7 @@ HashEntry_AStar* ht_astar_find(HashTable_AStar* ht, const IntVector* state) {
 
 HashEntry_AStar* ht_astar_insert_or_get(HashTable_AStar* ht, const IntVector* state, bool* new_entry_created) {
   if (!ht || !ht->buckets) {
-    if(new_entry_created) *new_entry_created = false;
+    if (new_entry_created) *new_entry_created = false;
     return NULL;
   }
   HashEntry_AStar* existing_entry = ht_astar_find(ht, state);
@@ -533,7 +533,7 @@ IntVectorArray solvePuzzleAStar(int** initial_board, int rows, int cols) {
         curr_path_state_tracer = temp_pred_for_next_trace;
         path_tracer_entry = ht_astar_find(&state_data_table, &curr_path_state_tracer);
       }
-      if (iv_compare(&curr_path_state_tracer, &initial_state_vec) == 0){
+      if (iv_compare(&curr_path_state_tracer, &initial_state_vec) == 0) {
         iva_add(&path, &initial_state_vec);
       }
       iv_destroy(&curr_path_state_tracer);
@@ -573,7 +573,7 @@ IntVectorArray solvePuzzleAStar(int** initial_board, int rows, int cols) {
         int tentative_g_score = current_ht_entry->g_score + 1;
 
         if (tentative_g_score < neighbor_ht_entry->g_score) {
-          if(neighbor_ht_entry->pred_state.data != NULL) {
+          if (neighbor_ht_entry->pred_state.data != NULL) {
             iv_destroy(&neighbor_ht_entry->pred_state);
           }
           neighbor_ht_entry->pred_state = iv_copy(&current_ht_entry->state);
@@ -698,19 +698,20 @@ void initGameBoard(int*** board_ptr, int rows, int cols) {
     int inv_count = 0;
     int current_empty_pos = -1;
 
-    IntVector temp_for_inv = iv_create(num_tiles -1);
-    for(int i=0; i<num_tiles; ++i) {
-      if(temp_tiles[i] == empty_tile_value) {
+    IntVector temp_for_inv = iv_create(num_tiles - 1);
+    for (int i = 0; i < num_tiles; ++i) {
+      if (temp_tiles[i] == empty_tile_value) {
         current_empty_pos = i;
-      } else {
+      }
+      else {
         iv_push_back(&temp_for_inv, temp_tiles[i]);
       }
     }
     assert(current_empty_pos != -1);
 
-    for(size_t i=0; i < temp_for_inv.size; ++i) {
-      for(size_t j=i+1; j < temp_for_inv.size; ++j) {
-        if(temp_for_inv.data[i] > temp_for_inv.data[j]) {
+    for (size_t i = 0; i < temp_for_inv.size; ++i) {
+      for (size_t j = i + 1; j < temp_for_inv.size; ++j) {
+        if (temp_for_inv.data[i] > temp_for_inv.data[j]) {
           inv_count++;
         }
       }
@@ -722,7 +723,8 @@ void initGameBoard(int*** board_ptr, int rows, int cols) {
 
     if (cols % 2 == 1) {
       is_currently_solvable = (inv_count % 2 == 0);
-    } else {
+    }
+    else {
       int blank_row_from_bottom_1_indexed = rows - blank_tile_row_from_top;
       is_currently_solvable = ((inv_count + blank_row_from_bottom_1_indexed) % 2 != 0);
     }
@@ -783,7 +785,8 @@ void drawTimerAndCounter() {
 
   if (LEVEL_TIME_LIMIT_MS == 0) {
     sprintf(time_str, "Time: --:--");
-  } else {
+  }
+  else {
     int minutes = remaining_ms / (60000); int seconds = (remaining_ms / 1000) % 60;
     sprintf(time_str, "Time: %02d:%02d", minutes, seconds);
   }
@@ -832,7 +835,7 @@ void handleGameEvent(int** board, int rows, int cols, ExMessage msg, bool* game_
         MessageBox(hwnd, "Puzzle is already solved!", "AI", MB_OK | MB_ICONINFORMATION); return;
       }
 
-      if (g_ai_solution_path.count == 0 || g_ai_current_step_in_path >= g_ai_solution_path.count -1 ) {
+      if (g_ai_solution_path.count == 0 || g_ai_current_step_in_path >= g_ai_solution_path.count - 1) {
         iva_destroy(&g_ai_solution_path);
         g_ai_solution_path = iva_create(10);
         g_ai_current_step_in_path = 0;
@@ -866,7 +869,8 @@ void handleGameEvent(int** board, int rows, int cols, ExMessage msg, bool* game_
       if (g_ai_current_step_in_path < g_ai_solution_path.count) {
         vectorToBoard(&g_ai_solution_path.path_steps[g_ai_current_step_in_path], board, rows, cols, rows * cols - 1);
         g_move_count++;
-      } else {
+      }
+      else {
         iva_clear(&g_ai_solution_path);
         g_ai_current_step_in_path = 0;
         MessageBox(hwnd, "AI path complete or puzzle solved by AI!", "AI Path End", MB_OK | MB_ICONINFORMATION);
@@ -880,10 +884,10 @@ void handleGameEvent(int** board, int rows, int cols, ExMessage msg, bool* game_
     bool can_move = false;
 
     switch (msg.vkcode) {
-    case VK_UP:    tile_to_move_row = g_empty_tile_row + 1; if (tile_to_move_row < rows) can_move = true; break;
-    case VK_DOWN:  tile_to_move_row = g_empty_tile_row - 1; if (tile_to_move_row >= 0) can_move = true; break;
-    case VK_LEFT:  tile_to_move_col = g_empty_tile_col + 1; if (tile_to_move_col < cols) can_move = true; break;
-    case VK_RIGHT: tile_to_move_col = g_empty_tile_col - 1; if (tile_to_move_col >= 0) can_move = true; break;
+    case VK_DOWN:    tile_to_move_row = g_empty_tile_row + 1; if (tile_to_move_row < rows) can_move = true; break;
+    case VK_UP:  tile_to_move_row = g_empty_tile_row - 1; if (tile_to_move_row >= 0) can_move = true; break;
+    case VK_RIGHT:  tile_to_move_col = g_empty_tile_col + 1; if (tile_to_move_col < cols) can_move = true; break;
+    case VK_LEFT: tile_to_move_col = g_empty_tile_col - 1; if (tile_to_move_col >= 0) can_move = true; break;
     default: return;
     }
 
@@ -922,7 +926,8 @@ void playBGM(const char* music_file) {
   sprintf(mci_command, "open \"%s\" alias bgm", music_file);
   if (mciSendString(mci_command, NULL, 0, NULL) == 0) {
     mciSendString("play bgm repeat", NULL, 0, NULL);
-  } else {
+  }
+  else {
     printf("Warning: Failed to load BGM %s\n", music_file);
   }
 }
@@ -942,7 +947,7 @@ int Game(int difficulty_idx_param) {
 
   HWND hwnd = initgraph(TOTAL_WINDOW_WIDTH, WINDOW_HEIGHT);
   if (hwnd == NULL) { printf("Failed to init graphics.\n"); return -1; }
-  SetWindowText(hwnd, "Traditional Culture Puzzle Game - A* AI (C Hash Table)");
+  SetWindowText(hwnd, "Traditional Culture Puzzle Game - A* AI (With C data structures)");
 
   if (BGMplaying) playBGM("./res/music.mp3");
 
@@ -970,7 +975,8 @@ int Game(int difficulty_idx_param) {
       if (current_difficulty_idx >= sizeof(DIFFICULTY_LEVELS) / sizeof(DIFFICULTY_LEVELS[0])) {
         char msg[100]; sprintf(msg, "All levels cleared! Total Moves: %d", g_move_count);
         MessageBox(hwnd, msg, "Victory!", MB_OK | MB_ICONINFORMATION); game_running = false;
-      } else {
+      }
+      else {
         char msg[150];
         DWORD time_taken_ms = GetTickCount() - g_level_start_time;
         sprintf(msg, "Level Clear! Moves: %d, Time: %lu.%03lus\nNext Level: %dx%d",
